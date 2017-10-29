@@ -1,0 +1,17 @@
+language: go
+
+go:
+  - master
+
+script:
+  - ./run_test.sh
+
+after_success:
+  - include_cov=coverage.txt bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    recipients:
+      secure: "tKOi2nGETG7t3/yUIGtH0aR51dSrc1CJw9+lWhYurEyc+JViqxgF9ftLBnh45qrhBwBsPRkddvQfY03jBfc1KYEUJDtlJMEQzNrl/KSMLoEuyV9Oc7A91BfLOX/MDc9pz1u+OrrF9A3BOa230k/OiRKbhFx7HGXImYNkUmUHJUGke6yH2lJ7vU8U73O3tXkq6WJahcJrLELbo2WpEXRNOLMb8oW5Ni8aSqXrMjogenNJB2Iy10QWDjIod4bH4wdAaYRfynDlSXuZAlyipxOn7XRI+FXtqlD0ZU4Jj6bAMfeo53FF8MTiIr3PavlY3A5I9LukshVrHiH1HFCut248K/o6sucXztSvZRDaRzRSgbtmycah/YwcbenDfVx5s+075oCIWlqqbouDHJZ3bRamQXhKc/CTsiYyHFcT7RZHCRo0GTk9R+48w22l4xcXbDalVl4YPw0LMSUi4JaYBUx2ZsMhcdDqQ/Xb026V3QJvS9qslRieuNzAlzB85FXNhAwlPoR/A9jwo1wLpIyDOK/zExJ1XWwx/b7jltOOUw89rgDdpc+6yF+rlKd8CnHrCNjwX4yyk+pEY33j79Ayel1xXQ4ZkUzBPgFxJJOnMLRWC674xmg69Cgfx/h3X8Kx1/eZluz12IxmKhCZhk/zJUX3FdEJO8XV1AvHxcgdpYSkxDc="
+    on_success: change
+    on_failure: always

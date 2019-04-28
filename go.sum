@@ -1,0 +1,4 @@
+github.com/bsphere/le_go v0.0.0-20170215134836-7a984a84b549 h1:QJJnIXZ34OUK5JfWlq1l3n0SfO9g1amiLFIcTECgpq0=
+github.com/bsphere/le_go v0.0.0-20170215134836-7a984a84b549/go.mod h1:313oBJKClgRD/+t59eUnrfG7/xHXZJd7v+SjCacDm4Q=
+github.com/golang/mock v1.0.0 h1:HzcpUG60pfl43n9d2qbdi/3l1uKpAmxlfWEPWtV/QxM=
+github.com/golang/mock v1.0.0/go.mod h1:oTYuIxOrZwtPieC+H1uAHpcLFnEyAGVDL/k47Jfbm0A=

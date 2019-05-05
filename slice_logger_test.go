@@ -8,7 +8,7 @@ func NewSliceLogger() Logger {
 	return &SliceLogger{}
 }
 
-// SliceLogger is a logger that puts everything in a slice (usefull for testing)
+// SliceLogger is a logger that puts everything in a slice (useful for testing)
 // /!\ Not go-routine-safe
 type SliceLogger struct {
 	data   []string

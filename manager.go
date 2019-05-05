@@ -2,9 +2,10 @@ package logger
 
 import (
 	"fmt"
+	"sync"
+
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
-	"sync"
 )
 
 // gomock interface, requires mockgen

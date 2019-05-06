@@ -375,4 +375,42 @@ func TestManagerLog(t *testing.T) {
 
 		require.Len(t, l2.data, 1, "no logs should have been added")
 	})
+
+	t.Run("Log with globals parents", func(t *testing.T) {
+		t.Parallel()
+
+		m := NewManager()
+		lo1 := NewSliceLogger()
+		l1 := lo1.(*SliceLogger)
+		require.NoError(t, m.Add(l1))
+		m.AddGlobalData("1", "a")
+		m.AddGlobalData("2", "b")
+		mJSONData := `{"1":"a","2":"b"}`
+
+		sm := m.NewSubManager("")
+		lo2 := NewSliceLogger()
+		l2 := lo2.(*SliceLogger)
+		l2.id = "fake-id"
+		require.NoError(t, sm.Add(l2))
+		sm.AddGlobalData("0", "a")
+		sm.AddGlobalData("1", "b")
+		smJSONData := `{"0":"a","1":"b","2":"b"}`
+
+		sm.Log("a", "b")
+
+		require.Len(t, l1.data, 1, "no logs added")
+		expectation := fmt.Sprintf("a b\n%s\n", smJSONData)
+		assert.Equal(t, expectation, l1.data[0])
+
+		require.Len(t, l2.data, 1, "no logs added")
+		assert.Equal(t, expectation, l2.data[0])
+
+		m.Log("c", "d")
+
+		require.Len(t, l1.data, 2, "no logs added")
+		expectation = fmt.Sprintf("c d\n%s\n", mJSONData)
+		assert.Equal(t, expectation, l1.data[1])
+
+		require.Len(t, l2.data, 1, "no logs should have been added")
+	})
 }

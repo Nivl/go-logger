@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"encoding/json"
 	"fmt"
 	"sync"
 
@@ -397,5 +398,26 @@ func (m *DefaultManager) format(msg string) string {
 	if msg[len(msg)-1] != '\n' {
 		return msg + "\n"
 	}
+
+	globals := m.allGlobals()
+	if len(globals) > 0 {
+		jsonGlobals, err := json.Marshal(globals)
+		if err != nil {
+			panic(errors.Wrap(err, "could not encode the globals to JSON"))
+		}
+		msg += string(jsonGlobals) + "\n"
+	}
+
 	return msg
+}
+
+func (m *DefaultManager) allGlobals() map[string]interface{} {
+	globals := map[string]interface{}{}
+	if m.parent != nil {
+		globals = m.parent.allGlobals()
+	}
+	for k, v := range m.globals {
+		globals[k] = v
+	}
+	return globals
 }

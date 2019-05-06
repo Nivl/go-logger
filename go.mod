@@ -3,8 +3,9 @@ module github.com/Nivl/go-logger
 go 1.12
 
 require (
+	github.com/go-critic/go-critic v0.0.0-20181204210945-ee9bf5809ead // indirect
 	github.com/golang/mock v1.3.0
-	github.com/golangci/golangci-lint v1.16.0
+	github.com/golangci/golangci-lint v1.16.1-0.20190425135923-692dacb773b7
 	github.com/google/uuid v1.1.1
 	github.com/pkg/errors v0.8.0
 	github.com/stretchr/testify v1.2.2

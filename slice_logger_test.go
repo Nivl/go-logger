@@ -29,6 +29,10 @@ func (l *SliceLogger) Close() error {
 	return nil
 }
 
+func (l *SliceLogger) clear() {
+	l.data = []string{}
+}
+
 func (l *SliceLogger) IsClosed() bool {
 	return l.closed
 }

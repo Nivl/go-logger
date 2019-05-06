@@ -95,8 +95,8 @@ type Manager interface {
 	Log(args ...interface{})
 }
 
-// Error represents an error caused by a specific logger
-type Error struct {
+// Err represents an error caused by a specific logger
+type Err struct {
 	error
 	Logger Logger
 }
@@ -161,7 +161,7 @@ func (m *DefaultManager) Add(l Logger) error {
 }
 
 // Remove safely removes a logger
-// returns an Error struct if a logger could not be safely removed.
+// returns an Err struct if a logger could not be safely removed.
 // Upon errors the logger will be force removed from the manager
 func (m *DefaultManager) Remove(loggerID string) error {
 	m.Lock()
@@ -172,7 +172,7 @@ func (m *DefaultManager) Remove(loggerID string) error {
 	if ok && l != nil {
 		err := l.Close()
 		if err != nil {
-			return &Error{
+			return &Err{
 				error:  err,
 				Logger: l,
 			}
@@ -207,7 +207,7 @@ func (m *DefaultManager) closeFromParent(fromParents bool) []error {
 	// Close the loggers
 	for _, l := range loggers {
 		if err := l.Close(); err != nil {
-			errs = append(errs, &Error{error: err, Logger: l})
+			errs = append(errs, &Err{error: err, Logger: l})
 		}
 	}
 

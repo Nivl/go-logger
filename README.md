@@ -45,3 +45,7 @@ m.Add(logger.NewStderrLogger())
 
 m.Error("foobar") // printed on stderr
 ```
+
+### External implementations
+
+- [Native Logger](https://github.com/Nivl/gologger-native): Logger using the native log system of the current OS
